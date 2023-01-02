@@ -5,9 +5,9 @@ int check_win_condition(char b[10])	// check win condition here
 {
 	if (b[1] == b[2] && b[2] == b[3])	{
 		if (b[2] == 'X')
-                        return 1;
+                        return 1;	// return 1 if player 1 wins
                 else if (b[2] == 'O')
-                        return 0;
+                        return 0;	// return 0 of player 2 wins
 	}
 
 	else if (b[4] == b[5] && b[5] == b[6])       {
@@ -63,25 +63,39 @@ int check_win_condition(char b[10])	// check win condition here
 		return -1;	// return -1 if it is a draw
 	}
 
-	return 2;
+	return 2;	// return 2 if game continues
 }
 
 void input_block_x(char board_input[10],char name_string[30])	// let a player input a cell
 {
 	int n;
 	char mark = 'X';
+	invalid_cell_x:
 	printf("%s - choose the cell: ",name_string);
 	scanf("%d",&n);
-	board_input[n] = mark;
+	if (board_input[n] != ' ')	{
+		printf("this cell is already taken. Go again.\n");
+		goto invalid_cell_x;
+	}
+	else if (board_input[n] == ' ')	{
+		board_input[n] = mark;
+	}
 }
 
 void input_block_o(char board_input[10],char name_string[30])	// let a player input a cell
 {
 	int n;
 	char mark = 'O';
+	invalid_cell_o:
 	printf("%s - choose the cell: ",name_string);
 	scanf("%d",&n);
-	board_input[n] = mark;
+	if (board_input[n] != ' ')	{
+		printf("this cell is already taken. Go again.\n");
+		goto invalid_cell_o;
+	}
+	else if (board_input[n] == ' ')	{
+		board_input[n] = mark;
+	}
 }
 
 void show_board(char board_look[10])	// this is here to show what the board looks like
