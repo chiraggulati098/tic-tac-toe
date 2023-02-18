@@ -71,9 +71,18 @@ void input_block_x(char board_input[10],char name_string[30])	// let a player in
 	int n;
 	char mark = 'X';
 	invalid_cell_x:
-	printf("%s - choose the cell: ",name_string);
+	puts(name_string);
+	printf("choose the cell: ");
 	scanf("%d",&n);
-	if (board_input[n] != ' ')	{
+	if (n < 0)	{
+		printf("enter a correct cell number\n");
+		goto invalid_cell_x;
+	}
+	else if (n > 9)	{
+		printf("enter a correct cell number\n");
+		goto invalid_cell_x;
+	}
+	else if (board_input[n] != ' ')	{
 		printf("this cell is already taken. Go again.\n");
 		goto invalid_cell_x;
 	}
@@ -87,9 +96,18 @@ void input_block_o(char board_input[10],char name_string[30])	// let a player in
 	int n;
 	char mark = 'O';
 	invalid_cell_o:
-	printf("%s - choose the cell: ",name_string);
+	puts(name_string);
+	printf("choose the cell: ");
 	scanf("%d",&n);
-	if (board_input[n] != ' ')	{
+	if (n < 0)	{
+		printf("enter a correct cell number\n");
+		goto invalid_cell_o;
+	}
+	else if (n > 9)	{
+		printf("enter a correct cell number\n");
+		goto invalid_cell_o;
+	}
+	else if (board_input[n] != ' ')	{
 		printf("this cell is already taken. Go again.\n");
 		goto invalid_cell_o;
 	}
@@ -110,14 +128,14 @@ void show_board(char board_look[10])	// this is here to show what the board look
 void input_names(char xname[30], char yname[30])	// change gets to fgets in the longer scale
 {
 	printf("\nenter player 1 name: ");
-	gets(xname);
+	fgets(xname,30,stdin);
 	printf("enter player 2 name: ");
-	gets(yname);
+	fgets(yname,30,stdin);
 }
 
 void display_rules()	// input actual rules later
 {
-	printf("2 PLAYER TIC-TAC-TOE\n\nHow the game works:\n1. something\n2. something\n");
+	printf("2 PLAYER TIC-TAC-TOE\n\nHow the game works:\n1. Enter a number from 1 to 9 to enter your mark on the playing board.\n2. The first player to have his sign in a line wins.\n");
 }
 
 int run_game()	// main game code
